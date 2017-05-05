@@ -1,0 +1,74 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: red;
+  height: 80px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.movieName {
+
+  width: 100px;
+  margin-left: 10px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.movieBoxes {
+  text-align: center;
+  padding-left: 5px;
+
+}
+
+.movieBox {
+  height: 350px;
+  width: 18%;
+  float: left;
+  background-color: rgb(187, 212, 245);
+  margin: 5px;
+  border: 1px solid black;
+  color: black;
+  cursor:pointer;
+  overflow: hidden;
+}
+.movieBox img {
+  width: 90%;
+}
+
+#movieTitle {
+  height: 30px;
+  font-size: 30px;
+  padding: 20px;
+}
+#moviePosterContainer {
+  width: 40%;
+  float: left;
+  border: 5px solid black;
+}
+
+#moviePoster {
+  width: 100%;
+  height: auto;
+}
+
+#movieDetailsPane {
+  width: calc(57% - 15px);
+  float: right;
+  font-size: 25px;
+  text-align: left;
+  padding: 10px;
+}

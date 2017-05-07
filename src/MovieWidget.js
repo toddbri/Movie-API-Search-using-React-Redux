@@ -5,14 +5,12 @@ import './MovieWidget.css';
 class MovieWidget extends React.Component {
 
   render() {
-    // console.log('loading: ' + this.props.loading);
     console.log("singleMovie: "+ this.props.singleMovie);
     let movies =[];
     let arrMovies = [];
     let singleMovie = null;
     let mainCast = [];
     if (this.props.singleMovie){ //this is for a single movie
-      // console.log("singleMovieprops: " + this.props.movieDetails.results[this.props.movieDetails.movieID]);
       let movieDetails = this.props.movieDetails.results[this.props.movieID]; //movieDetails is an object of the information
       console.log("looking for details on movie with index: " + this.props.movieID);
       console.log("singleMovieResults: " + movieDetails);
@@ -36,20 +34,16 @@ class MovieWidget extends React.Component {
                           {cast}
                         </div>
                     </div>;
-      // console.log('singleMovie: ' + singleMovie);
 
     } else {  //this is for display query results
       console.log("searchResultsProps: " + this.props.movieDetails);
       Object.keys(this.props.movieDetails).forEach(movie => console.log('key: ' + movie));
       if (this.props.movieDetails.results) {
         arrMovies = this.props.movieDetails.results;
-        // console.log('arrMovies: ' + arrMovies);
-        // console.log('number of moviesA: ' + arrMovies.length);
-        // Object.keys(this.props.movieDetails.results).forEach( movie => movies.push(this.props.movieDetails.results[movie]));
+
         movies = arrMovies.map((item, idx) =>  (<div key={item.id} className="movieBox" onClick={() => this.props.specific(idx,item.id)}>
           <p>{item.title}</p><img alt="poster" src={item.poster_path === null ? "./images/comingsoon.png":"https://image.tmdb.org/t/p/w185_and_h278_bestv2" + item.poster_path}/>
         </div>));
-        // console.log('number of moviesB: ' + arrMovies.length);
       }
 
 
@@ -62,11 +56,12 @@ class MovieWidget extends React.Component {
 
           <h2>Welcome to MoviePhone</h2>
           <div className="input">Why don't you just tell me the name of the movie you are looking for?
-            <input onChange={event => this.props.inputChanged(event.target.value)} value={this.props.movieName}/>
-            <button onClick={() => this.props.go(this.props.movieName)}>Search</button>
+            <input onChange={event => this.props.typing(event.target.value)} value={this.props.movieName}/>
+            <button onClick={this.props.movieName.length>0 ? () => this.props.go(this.props.movieName):null}>Search</button>
           </div>
         </div>
         <div className="movieBoxes">
+        {this.props.loading ? <div className="loading"><img src="./images/projector.gif" alt=""/></div>: null}
         {movies}
         {singleMovie}
         </div>

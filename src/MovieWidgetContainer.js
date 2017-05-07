@@ -1,16 +1,18 @@
 import * as ReactRedux from 'react-redux';
 import MovieWidget from './MovieWidget';
 import $ from 'jquery';
-// inputChanged: (newInput) => dispatch({type: 'typing',newInput: newInput}),
+import * as actions from './MovieWidget.actions';
 
 const MovieWidgetContainer = ReactRedux.connect(
   state => state,
   dispatch => ({
-      inputChanged: (newInput) => dispatch({type: 'typing',newInput: newInput}),
+      typing : (newInput) => dispatch(actions.typing(newInput)),
       go: (query) => dispatch(getMovieData(query)),
       specific: (movieID, movieDBid) => dispatch(getMovieByID(movieID,movieDBid))
   })
 )(MovieWidget);
+
+export default MovieWidgetContainer;
 
 function getMovieByID(movieID, movieDBid){
 
@@ -46,13 +48,15 @@ function getMovieData(query){
         api_key: '4c4b3b5130ac777eddfdb210808ff541'
       }
     }) //data is returned as  JSON object
-    .then( data => {
+    .then( function(data){
 
-      dispatch({type: 'search', payload: data})})
+      setTimeout(function() {
+        dispatch({type: 'search', payload: data})
+      },300);
+
+    })
     .catch(resp => console.log(resp));
 
 
   }
 }
-
-export default MovieWidgetContainer;

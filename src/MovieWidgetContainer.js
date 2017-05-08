@@ -8,7 +8,7 @@ const MovieWidgetContainer = ReactRedux.connect(
   dispatch => ({
       typing : (newInput) => dispatch(actions.typing(newInput)),
       go: (query) => dispatch(getMovieData(query)),
-      specific: (movieID, movieDBid) => dispatch(getMovieByID(movieID,movieDBid))
+      specific: (movieID, movieDBid) => dispatch(getMovieByID(movieID, movieDBid))
   })
 )(MovieWidget);
 
@@ -22,7 +22,7 @@ function getMovieByID(movieID, movieDBid){
       data: {
         api_key: '4c4b3b5130ac777eddfdb210808ff541'
       }
-    }) //data is returned as  JSON object
+    }) //data is returned as a JSON object
     .then( data => {
       console.log('data returned from single movie query: ' + data);
       console.log("----------DUMP CAST AND CREW QUERY RESULTS---------");
@@ -36,8 +36,8 @@ function getMovieByID(movieID, movieDBid){
 }
 
 function getMovieData(query){
-  // console.log('in getMovieData');
-  return function(dispatch){
+
+   return function(dispatch){
     dispatch({type: "loading"});
     $.ajax({
       url: 'https://api.themoviedb.org/3/search/movie',
@@ -47,7 +47,7 @@ function getMovieData(query){
         include_adult: false,
         api_key: '4c4b3b5130ac777eddfdb210808ff541'
       }
-    }) //data is returned as  JSON object
+    }) //data is returned as a JSON object
     .then( function(data){
 
       setTimeout(function() {
